@@ -22,7 +22,7 @@ func AddNewUser(b *User) (err error) {
 }
 
 func GetOneUser(b *User, id string) (err error) {
-	if err := Config.DB.Where("UUID = ?", id).First(b).Error; err != nil {
+	if err := Config.DB.Where("uuid = ?", id).First(b).Error; err != nil {
 		return err
 	}
 	return nil
@@ -35,6 +35,6 @@ func PutOneUser(b *User, id string) (err error) {
 }
 
 func DeleteUser(b *User, id string) (err error) {
-	Config.DB.Where("UUID = ?", id).Delete(b)
+	Config.DB.Where("uuid = ?", id).Delete(b)
 	return nil
 }

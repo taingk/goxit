@@ -30,7 +30,7 @@ func AddNewUser(c *gin.Context) {
 }
 
 func GetOneUser(c *gin.Context) {
-	id := c.Params.ByName("UUID")
+	id := c.Params.ByName("id")
 	var user Models.User
 	err := Models.GetOneUser(&user, id)
 	if err != nil {
@@ -42,7 +42,7 @@ func GetOneUser(c *gin.Context) {
 
 func PutOneUser(c *gin.Context) {
 	var user Models.User
-	id := c.Params.ByName("UUID")
+	id := c.Params.ByName("id")
 	err := Models.GetOneUser(&user, id)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, user)
@@ -58,7 +58,7 @@ func PutOneUser(c *gin.Context) {
 
 func DeleteUser(c *gin.Context) {
 	var user Models.User
-	id := c.Params.ByName("UUID")
+	id := c.Params.ByName("id")
 	err := Models.DeleteUser(&user, id)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, user)
