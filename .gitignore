@@ -1,0 +1,5 @@
+docker/data/
+api/main
+.idea/
+.DS_Store
+*~
