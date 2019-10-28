@@ -9,6 +9,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/howeyc/fsnotify v0.9.0 // indirect
 	github.com/jinzhu/gorm v1.9.11
+	github.com/lib/pq v1.1.1
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/satori/go.uuid v1.2.0
 )

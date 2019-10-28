@@ -1,4 +1,4 @@
-package Controllers
+package Handlers
 
 import (
 	uuid "github.com/satori/go.uuid"
