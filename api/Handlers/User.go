@@ -1,10 +1,10 @@
 package Handlers
 
 import (
+	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 	"github.com/taingk/goxit/api/ApiHelpers"
 	"github.com/taingk/goxit/api/Models"
-	"github.com/gin-gonic/gin"
 )
 
 func ListUser(c *gin.Context) {
@@ -30,9 +30,9 @@ func AddNewUser(c *gin.Context) {
 }
 
 func GetOneUser(c *gin.Context) {
-	id := c.Params.ByName("id")
+	uuid := c.Params.ByName("uuid")
 	var user Models.User
-	err := Models.GetOneUser(&user, id)
+	err := Models.GetOneUser(&user, uuid)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, user)
 	} else {
@@ -42,13 +42,13 @@ func GetOneUser(c *gin.Context) {
 
 func PutOneUser(c *gin.Context) {
 	var user Models.User
-	id := c.Params.ByName("id")
-	err := Models.GetOneUser(&user, id)
+	uuid := c.Params.ByName("uuid")
+	err := Models.GetOneUser(&user, uuid)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, user)
 	}
 	c.BindJSON(&user)
-	err = Models.PutOneUser(&user, id)
+	err = Models.PutOneUser(&user, uuid)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, user)
 	} else {
@@ -58,8 +58,8 @@ func PutOneUser(c *gin.Context) {
 
 func DeleteUser(c *gin.Context) {
 	var user Models.User
-	id := c.Params.ByName("id")
-	err := Models.DeleteUser(&user, id)
+	uuid := c.Params.ByName("uuid")
+	err := Models.DeleteUser(&user, uuid)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, user)
 	} else {

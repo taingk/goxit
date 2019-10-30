@@ -10,14 +10,14 @@ func SetupRouter() *gin.Engine {
 
 	r.GET("user", Handlers.ListUser)
 	r.POST("user", Handlers.AddNewUser)
-	r.GET("user/:id", Handlers.GetOneUser)
-	r.PUT("user/:id", Handlers.PutOneUser)
-	r.DELETE("user/:id", Handlers.DeleteUser)
+	r.GET("user/:uuid", Handlers.GetOneUser)
+	r.PUT("user/:uuid", Handlers.PutOneUser)
+	r.DELETE("user/:uuid", Handlers.DeleteUser)
 	r.GET("vote", Handlers.ListVote)
 	r.POST("vote", Handlers.AddNewVote)
-	r.GET("vote/:id", Handlers.GetOneVote)
-	r.PUT("vote/:id", Handlers.PutOneVote)
-	r.DELETE("vote/:id", Handlers.DeleteVote)
+	r.GET("vote/:uuid", Handlers.GetOneVote)
+	r.PUT("vote/:uuid", Handlers.PutOneVote)
+	r.DELETE("vote/:uuid", Handlers.DeleteVote)
 
 	return r
 }

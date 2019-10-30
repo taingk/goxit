@@ -1,10 +1,10 @@
 package Handlers
 
 import (
+	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 	"github.com/taingk/goxit/api/ApiHelpers"
 	"github.com/taingk/goxit/api/Models"
-	"github.com/gin-gonic/gin"
 )
 
 func ListVote(c *gin.Context) {
@@ -30,9 +30,9 @@ func AddNewVote(c *gin.Context) {
 }
 
 func GetOneVote(c *gin.Context) {
-	id := c.Params.ByName("id")
+	uuid := c.Params.ByName("uuid")
 	var vote Models.Vote
-	err := Models.GetOneVote(&vote, id)
+	err := Models.GetOneVote(&vote, uuid)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, vote)
 	} else {
@@ -42,13 +42,13 @@ func GetOneVote(c *gin.Context) {
 
 func PutOneVote(c *gin.Context) {
 	var vote Models.Vote
-	id := c.Params.ByName("id")
-	err := Models.GetOneVote(&vote, id)
+	uuid := c.Params.ByName("uuid")
+	err := Models.GetOneVote(&vote, uuid)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, vote)
 	}
 	c.BindJSON(&vote)
-	err = Models.PutOneVote(&vote, id)
+	err = Models.PutOneVote(&vote, uuid)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, vote)
 	} else {
@@ -58,8 +58,8 @@ func PutOneVote(c *gin.Context) {
 
 func DeleteVote(c *gin.Context) {
 	var vote Models.Vote
-	id := c.Params.ByName("id")
-	err := Models.DeleteVote(&vote, id)
+	uuid := c.Params.ByName("uuid")
+	err := Models.DeleteVote(&vote, uuid)
 	if err != nil {
 		ApiHelpers.RespondJSON(c, 404, vote)
 	} else {
