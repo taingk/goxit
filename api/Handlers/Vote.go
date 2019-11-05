@@ -18,14 +18,18 @@ func ListVote(c *gin.Context) {
 }
 
 func AddNewVote(c *gin.Context) {
-	var vote Models.Vote
-	vote.UUID = uuid.NewV4().String()
-	c.BindJSON(&vote)
-	err := Models.AddNewVote(&vote)
-	if err != nil {
-		Helpers.RespondJSON(c, 404, vote)
+	if Models.Authorize(c) == true {
+		var vote Models.Vote
+		vote.UUID = uuid.NewV4().String()
+		c.BindJSON(&vote)
+		err := Models.AddNewVote(&vote)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, vote)
+		} else {
+			Helpers.RespondJSON(c, 200, vote)
+		}
 	} else {
-		Helpers.RespondJSON(c, 200, vote)
+		Helpers.RespondJSON(c, 404, "Access not granted")
 	}
 }
 
@@ -41,28 +45,53 @@ func GetOneVote(c *gin.Context) {
 }
 
 func PutOneVote(c *gin.Context) {
-	var vote Models.Vote
-	uuid := c.Params.ByName("uuid")
-	err := Models.GetOneVote(&vote, uuid)
-	if err != nil {
-		Helpers.RespondJSON(c, 404, vote)
-	}
-	c.BindJSON(&vote)
-	err = Models.PutOneVote(&vote, uuid)
-	if err != nil {
-		Helpers.RespondJSON(c, 404, vote)
+	if Models.Authorize(c) == true {
+		var vote Models.Vote
+		uuid := c.Params.ByName("uuid")
+		err := Models.GetOneVote(&vote, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, vote)
+		}
+		c.BindJSON(&vote)
+		err = Models.PutOneVote(&vote, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, vote)
+		} else {
+			Helpers.RespondJSON(c, 200, vote)
+		}
+	} else if Models.AuthorizeSimpleUser(c) == true {
+		userUUID := c.Request.Header.Get("Authorization")
+		voteUUID := c.Params.ByName("uuid")
+		var vote Models.Vote
+		err := Models.GetOneVote(&vote, voteUUID)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, vote)
+		}
+		UUIDVotes := vote.UUIDVotes
+		UUIDVotes = append(UUIDVotes, userUUID)
+		vote.UUIDVotes = UUIDVotes
+		err = Models.PutOneVote(&vote, voteUUID)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, vote)
+		} else {
+			Helpers.RespondJSON(c, 200, vote)
+		}
 	} else {
-		Helpers.RespondJSON(c, 200, vote)
+		Helpers.RespondJSON(c, 404, "Access not granted")
 	}
 }
 
 func DeleteVote(c *gin.Context) {
-	var vote Models.Vote
-	uuid := c.Params.ByName("uuid")
-	err := Models.DeleteVote(&vote, uuid)
-	if err != nil {
-		Helpers.RespondJSON(c, 404, vote)
+	if Models.Authorize(c) == true {
+		var vote Models.Vote
+		uuid := c.Params.ByName("uuid")
+		err := Models.DeleteVote(&vote, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, vote)
+		} else {
+			Helpers.RespondJSON(c, 200, vote)
+		}
 	} else {
-		Helpers.RespondJSON(c, 200, vote)
+		Helpers.RespondJSON(c, 404, "Access not granted")
 	}
 }

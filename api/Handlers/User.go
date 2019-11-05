@@ -41,28 +41,36 @@ func GetOneUser(c *gin.Context) {
 }
 
 func PutOneUser(c *gin.Context) {
-	var user Models.User
-	uuid := c.Params.ByName("uuid")
-	err := Models.GetOneUser(&user, uuid)
-	if err != nil {
-		Helpers.RespondJSON(c, 404, user)
-	}
-	c.BindJSON(&user)
-	err = Models.PutOneUser(&user, uuid)
-	if err != nil {
-		Helpers.RespondJSON(c, 404, user)
+	if Models.Authorize(c) == true {
+		var user Models.User
+		uuid := c.Params.ByName("uuid")
+		err := Models.GetOneUser(&user, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, user)
+		}
+		c.BindJSON(&user)
+		err = Models.PutOneUser(&user, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, user)
+		} else {
+			Helpers.RespondJSON(c, 200, user)
+		}
 	} else {
-		Helpers.RespondJSON(c, 200, user)
+		Helpers.RespondJSON(c, 404, "Access not granted")
 	}
 }
 
 func DeleteUser(c *gin.Context) {
-	var user Models.User
-	uuid := c.Params.ByName("uuid")
-	err := Models.DeleteUser(&user, uuid)
-	if err != nil {
-		Helpers.RespondJSON(c, 404, user)
+	if Models.Authorize(c) == true {
+		var user Models.User
+		uuid := c.Params.ByName("uuid")
+		err := Models.DeleteUser(&user, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, user)
+		} else {
+			Helpers.RespondJSON(c, 200, user)
+		}
 	} else {
-		Helpers.RespondJSON(c, 200, user)
+		Helpers.RespondJSON(c, 404, "Access not granted")
 	}
 }

@@ -11,12 +11,6 @@ type Jwt struct {
 	AccessLevel int
 }
 
-type ResponseData struct {
-	Status int
-	Meta   interface{}
-	Data   interface{}
-}
-
 func Login(c *gin.Context) {
 	var user Models.User
 	c.BindJSON(&user)
