@@ -16,7 +16,7 @@ func GetAllUser(b *[]User) (err error) {
 }
 
 func AddNewUser(b *User) (err error) {
-	var encryptedPassword = Helpers.encryptPassword(b.Password)
+	var encryptedPassword = Helpers.EncryptPassword(b.Password)
 	b.Password = encryptedPassword
 	if err = Config.DB.Create(b).Error; err != nil {
 		return err
@@ -39,5 +39,12 @@ func PutOneUser(b *User, uuid string) (err error) {
 
 func DeleteUser(b *User, uuid string) (err error) {
 	Config.DB.Where("uuid = ?", uuid).Delete(b)
+	return nil
+}
+
+func GetUserByEmailPassword(b *User) (err error) {
+	if err := Config.DB.Where("email = ? AND password = ?", b.Email, Helpers.EncryptPassword(b.Password)).First(b).Error; err != nil {
+		return err
+	}
 	return nil
 }
