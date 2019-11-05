@@ -5,6 +5,7 @@ import (
 
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/taingk/goxit/api/Config"
+	"github.com/taingk/goxit/api/Helpers"
 )
 
 func GetAllUser(b *[]User) (err error) {
@@ -15,6 +16,8 @@ func GetAllUser(b *[]User) (err error) {
 }
 
 func AddNewUser(b *User) (err error) {
+	var encryptedPassword = Helpers.encryptPassword(b.Password)
+	b.Password = encryptedPassword
 	if err = Config.DB.Create(b).Error; err != nil {
 		return err
 	}
