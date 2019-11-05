@@ -7,8 +7,8 @@ import (
 type User struct {
 	gorm.Model
 	UUID      string `json:"uuid" gorm:"primary_key"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
+	Firstname string `json:"firstname"`
+	Lastname  string `json:"lastname"`
 	Email     string `json:"email"`
 	Password  string `json:"password"`
 	BirthDate string `json:"birth_date"`

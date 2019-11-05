@@ -8,6 +8,7 @@ import (
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
+	r.POST("login", Handlers.Login)
 	r.GET("user", Handlers.ListUser)
 	r.POST("user", Handlers.AddNewUser)
 	r.GET("user/:uuid", Handlers.GetOneUser)
