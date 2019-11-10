@@ -24,6 +24,6 @@ func main() {
 	Config.DB.AutoMigrate(&Models.Vote{})
 
 	r := Routers.SetupRouter()
-	// running
-	r.Run()
+
+	r.Run(":8080")
 }

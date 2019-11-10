@@ -1,6 +1,8 @@
 package Models
 
 import (
+	"time"
+
 	"github.com/jinzhu/gorm"
 )
 
@@ -11,7 +13,8 @@ type User struct {
 	LastName  string `json:"last_name" validate:"required|alph|min=2"`
 	Email     string `json:"email" validate:"required|email"`
 	Password  string `json:"password" validate:"required"`
-	BirthDate string `json:"birth_date" validate:"required"`
+	BirthDate time.Time `json:"birth_date" validate:"required"`
+  AccessLevel int       `json:"access_level"`
 }
 
 func (b *User) TableName() string {

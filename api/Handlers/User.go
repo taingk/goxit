@@ -1,19 +1,19 @@
 package Handlers
 
 import (
-	uuid "github.com/satori/go.uuid"
-	"github.com/taingk/goxit/api/ApiHelpers"
-	"github.com/taingk/goxit/api/Models"
 	"github.com/gin-gonic/gin"
+	uuid "github.com/satori/go.uuid"
+	"github.com/taingk/goxit/api/Helpers"
+	"github.com/taingk/goxit/api/Models"
 )
 
 func ListUser(c *gin.Context) {
 	var user []Models.User
 	err := Models.GetAllUser(&user)
 	if err != nil {
-		ApiHelpers.RespondJSON(c, 404, user)
+		Helpers.RespondJSON(c, 404, user)
 	} else {
-		ApiHelpers.RespondJSON(c, 200, user)
+		Helpers.RespondJSON(c, 200, user)
 	}
 }
 
@@ -23,46 +23,54 @@ func AddNewUser(c *gin.Context) {
 	c.BindJSON(&user)
 	err := Models.AddNewUser(&user)
 	if err != nil {
-		ApiHelpers.RespondJSON(c, 404, user)
+		Helpers.RespondJSON(c, 404, user)
 	} else {
-		ApiHelpers.RespondJSON(c, 200, user)
+		Helpers.RespondJSON(c, 200, user)
 	}
 }
 
 func GetOneUser(c *gin.Context) {
-	id := c.Params.ByName("id")
+	uuid := c.Params.ByName("uuid")
 	var user Models.User
-	err := Models.GetOneUser(&user, id)
+	err := Models.GetOneUser(&user, uuid)
 	if err != nil {
-		ApiHelpers.RespondJSON(c, 404, user)
+		Helpers.RespondJSON(c, 404, user)
 	} else {
-		ApiHelpers.RespondJSON(c, 200, user)
+		Helpers.RespondJSON(c, 200, user)
 	}
 }
 
 func PutOneUser(c *gin.Context) {
-	var user Models.User
-	id := c.Params.ByName("id")
-	err := Models.GetOneUser(&user, id)
-	if err != nil {
-		ApiHelpers.RespondJSON(c, 404, user)
-	}
-	c.BindJSON(&user)
-	err = Models.PutOneUser(&user, id)
-	if err != nil {
-		ApiHelpers.RespondJSON(c, 404, user)
+	if Models.Authorize(c) == true {
+		var user Models.User
+		uuid := c.Params.ByName("uuid")
+		err := Models.GetOneUser(&user, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, user)
+		}
+		c.BindJSON(&user)
+		err = Models.PutOneUser(&user, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, user)
+		} else {
+			Helpers.RespondJSON(c, 200, user)
+		}
 	} else {
-		ApiHelpers.RespondJSON(c, 200, user)
+		Helpers.RespondJSON(c, 404, "Access not granted")
 	}
 }
 
 func DeleteUser(c *gin.Context) {
-	var user Models.User
-	id := c.Params.ByName("id")
-	err := Models.DeleteUser(&user, id)
-	if err != nil {
-		ApiHelpers.RespondJSON(c, 404, user)
+	if Models.Authorize(c) == true {
+		var user Models.User
+		uuid := c.Params.ByName("uuid")
+		err := Models.DeleteUser(&user, uuid)
+		if err != nil {
+			Helpers.RespondJSON(c, 404, user)
+		} else {
+			Helpers.RespondJSON(c, 200, user)
+		}
 	} else {
-		ApiHelpers.RespondJSON(c, 200, user)
+		Helpers.RespondJSON(c, 404, "Access not granted")
 	}
 }
