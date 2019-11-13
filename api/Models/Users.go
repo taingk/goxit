@@ -11,8 +11,6 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-var validate *validator.Validate
-
 func GetAllUser(b *[]User) (err error) {
 	if err = Config.DB.Find(b).Error; err != nil {
 		return err
@@ -21,8 +19,8 @@ func GetAllUser(b *[]User) (err error) {
 }
 
 func AddNewUser(b *User) (err error) {
+	var validate *validator.Validate
 	validate = validator.New()
-	fmt.Println(validate.Struct(b))
 	if err = validate.Struct(b); err != nil {
 		return err
 	}
@@ -43,6 +41,7 @@ func GetOneUser(b *User, uuid string) (err error) {
 }
 
 func PutOneUser(b *User, uuid string) (err error) {
+	var validate *validator.Validate
 	validate = validator.New()
 	if err = validate.Struct(b); err != nil {
 		return err
