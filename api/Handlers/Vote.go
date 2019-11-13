@@ -5,7 +5,6 @@ import (
 	uuid "github.com/satori/go.uuid"
 	"github.com/taingk/goxit/api/Helpers"
 	"github.com/taingk/goxit/api/Models"
-	"fmt"
 )
 
 func ListVote(c *gin.Context) {
