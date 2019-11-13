@@ -5,6 +5,7 @@ import (
 	uuid "github.com/satori/go.uuid"
 	"github.com/taingk/goxit/api/Helpers"
 	"github.com/taingk/goxit/api/Models"
+	"fmt"
 )
 
 func ListVote(c *gin.Context) {
@@ -24,12 +25,12 @@ func AddNewVote(c *gin.Context) {
 		c.BindJSON(&vote)
 		err := Models.AddNewVote(&vote)
 		if err != nil {
-			Helpers.RespondJSON(c, 404, vote)
+			Helpers.RespondJSON(c, 400, vote)
 		} else {
 			Helpers.RespondJSON(c, 200, vote)
 		}
 	} else {
-		Helpers.RespondJSON(c, 404, "Access not granted")
+		Helpers.RespondJSON(c, 401, "Access not granted")
 	}
 }
 
@@ -52,10 +53,13 @@ func PutOneVote(c *gin.Context) {
 		if err != nil {
 			Helpers.RespondJSON(c, 404, vote)
 		}
-		c.BindJSON(&vote)
+		var newvote Models.Vote
+		newvote.Title = vote.Title
+		newvote.Description = vote.Description
+		c.BindJSON(newvote)
 		err = Models.PutOneVote(&vote, uuid)
 		if err != nil {
-			Helpers.RespondJSON(c, 404, vote)
+			Helpers.RespondJSON(c, 400, vote)
 		} else {
 			Helpers.RespondJSON(c, 200, vote)
 		}
@@ -72,12 +76,12 @@ func PutOneVote(c *gin.Context) {
 		vote.UUIDVotes = UUIDVotes
 		err = Models.PutOneVote(&vote, voteUUID)
 		if err != nil {
-			Helpers.RespondJSON(c, 404, vote)
+			Helpers.RespondJSON(c, 400, vote)
 		} else {
 			Helpers.RespondJSON(c, 200, vote)
 		}
 	} else {
-		Helpers.RespondJSON(c, 404, "Access not granted")
+		Helpers.RespondJSON(c, 401, "Access not granted")
 	}
 }
 
@@ -85,13 +89,18 @@ func DeleteVote(c *gin.Context) {
 	if Models.Authorize(c) == true {
 		var vote Models.Vote
 		uuid := c.Params.ByName("uuid")
-		err := Models.DeleteVote(&vote, uuid)
+		err := Models.GetOneVote(&vote, uuid)
 		if err != nil {
+			Helpers.RespondJSON(c, 404, vote)
+		}
+		c.BindJSON(&vote)
+		errdel := Models.DeleteVote(&vote, uuid)
+		if errdel != nil {
 			Helpers.RespondJSON(c, 404, vote)
 		} else {
 			Helpers.RespondJSON(c, 200, vote)
 		}
 	} else {
-		Helpers.RespondJSON(c, 404, "Access not granted")
+		Helpers.RespondJSON(c, 401, "Access not granted")
 	}
 }
