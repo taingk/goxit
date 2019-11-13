@@ -8,7 +8,10 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/taingk/goxit/api/Config"
 	"github.com/taingk/goxit/api/Helpers"
+	"gopkg.in/go-playground/validator.v9"
 )
+
+var validate *validator.Validate
 
 func GetAllUser(b *[]User) (err error) {
 	if err = Config.DB.Find(b).Error; err != nil {
@@ -18,6 +21,12 @@ func GetAllUser(b *[]User) (err error) {
 }
 
 func AddNewUser(b *User) (err error) {
+	validate = validator.New()
+	fmt.Println(validate.Struct(b))
+	if err = validate.Struct(b); err != nil {
+		return err
+	}
+
 	var encryptedPassword = Helpers.EncryptPassword(b.Password)
 	b.Password = encryptedPassword
 	if err = Config.DB.Create(b).Error; err != nil {
@@ -34,6 +43,11 @@ func GetOneUser(b *User, uuid string) (err error) {
 }
 
 func PutOneUser(b *User, uuid string) (err error) {
+	validate = validator.New()
+	if err = validate.Struct(b); err != nil {
+		return err
+	}
+
 	fmt.Println(b)
 	Config.DB.Save(b)
 	return nil
