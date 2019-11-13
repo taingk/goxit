@@ -5,6 +5,7 @@ import (
 
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/taingk/goxit/api/Config"
+	"gopkg.in/go-playground/validator.v9"
 )
 
 func GetAllVote(b *[]Vote) (err error) {
@@ -15,6 +16,12 @@ func GetAllVote(b *[]Vote) (err error) {
 }
 
 func AddNewVote(b *Vote) (err error) {
+	var validate *validator.Validate
+	validate = validator.New()
+	if err = validate.Struct(b); err != nil {
+		return err
+	}
+
 	if err = Config.DB.Create(b).Error; err != nil {
 		return err
 	}
@@ -29,6 +36,12 @@ func GetOneVote(b *Vote, uuid string) (err error) {
 }
 
 func PutOneVote(b *Vote, uuid string) (err error) {
+	var validate *validator.Validate
+	validate = validator.New()
+	if err = validate.Struct(b); err != nil {
+		return err
+	}
+
 	fmt.Println(b)
 	Config.DB.Save(b)
 	return nil
