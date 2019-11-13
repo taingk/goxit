@@ -15,6 +15,7 @@ type Vote struct {
 	UUIDVotes   pq.StringArray `json:"uuid_votes" gorm:"type:text[]"`
 	StartDate   time.Time      `json:"start_date"`
 	EndDate     time.Time      `json:"end_date"`
+	IsDeleted	int		  	   `json:"is_deleted"`
 }
 
 func (b *Vote) TableName() string {

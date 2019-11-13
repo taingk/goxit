@@ -12,7 +12,7 @@ import (
 )
 
 func GetAllUser(b *[]User) (err error) {
-	if err = Config.DB.Find(b).Error; err != nil {
+	if err = Config.DB.Where("is_deleted = 0").Find(b).Error; err != nil {
 		return err
 	}
 	return nil
@@ -27,6 +27,7 @@ func AddNewUser(b *User) (err error) {
 
 	var encryptedPassword = Helpers.EncryptPassword(b.Password)
 	b.Password = encryptedPassword
+	b.IsDeleted = 0
 	if err = Config.DB.Create(b).Error; err != nil {
 		return err
 	}
@@ -34,7 +35,7 @@ func AddNewUser(b *User) (err error) {
 }
 
 func GetOneUser(b *User, uuid string) (err error) {
-	if err := Config.DB.Where("uuid = ?", uuid).First(b).Error; err != nil {
+	if err := Config.DB.Where("uuid = ? AND is_deleted = 0", uuid).First(b).Error; err != nil {
 		return err
 	}
 	return nil
@@ -53,12 +54,13 @@ func PutOneUser(b *User, uuid string) (err error) {
 }
 
 func DeleteUser(b *User, uuid string) (err error) {
-	Config.DB.Where("uuid = ?", uuid).Delete(b)
+	b.IsDeleted = 1
+	Config.DB.Where("uuid = ?", uuid).Save(b)
 	return nil
 }
 
 func GetUserByEmailPassword(b *User) (err error) {
-	if err := Config.DB.Where("email = ? AND password = ?", b.Email, Helpers.EncryptPassword(b.Password)).First(b).Error; err != nil {
+	if err := Config.DB.Where("email = ? AND password = ? AND is_deleted = 0", b.Email, Helpers.EncryptPassword(b.Password)).First(b).Error; err != nil {
 		return err
 	}
 	return nil

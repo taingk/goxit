@@ -23,7 +23,7 @@ func AddNewUser(c *gin.Context) {
 	c.BindJSON(&user)
 	err := Models.AddNewUser(&user)
 	if err != nil {
-		Helpers.RespondJSON(c, 404, user)
+		Helpers.RespondJSON(c, 401, user)
 	} else {
 		Helpers.RespondJSON(c, 200, user)
 	}
@@ -51,12 +51,12 @@ func PutOneUser(c *gin.Context) {
 		c.BindJSON(&user)
 		err = Models.PutOneUser(&user, uuid)
 		if err != nil {
-			Helpers.RespondJSON(c, 404, user)
+			Helpers.RespondJSON(c, 401, user)
 		} else {
 			Helpers.RespondJSON(c, 200, user)
 		}
 	} else {
-		Helpers.RespondJSON(c, 404, "Access not granted")
+		Helpers.RespondJSON(c, 401, "Access not granted")
 	}
 }
 
@@ -64,13 +64,18 @@ func DeleteUser(c *gin.Context) {
 	if Models.Authorize(c) == true {
 		var user Models.User
 		uuid := c.Params.ByName("uuid")
-		err := Models.DeleteUser(&user, uuid)
+		err := Models.GetOneUser(&user, uuid)
 		if err != nil {
+			Helpers.RespondJSON(c, 404, user)
+		}
+		c.BindJSON(&user)
+		errdel := Models.DeleteUser(&user, uuid)
+		if errdel != nil {
 			Helpers.RespondJSON(c, 404, user)
 		} else {
 			Helpers.RespondJSON(c, 200, user)
 		}
 	} else {
-		Helpers.RespondJSON(c, 404, "Access not granted")
+		Helpers.RespondJSON(c, 401, "Access not granted")
 	}
 }

@@ -15,6 +15,7 @@ type User struct {
 	Password    string    `json:"password" validate:"required"`
 	BirthDate   time.Time `json:"birth_date"`
 	AccessLevel int       `json:"access_level"`
+	IsDeleted	int		  `json:"is_deleted"`
 }
 
 func (b *User) TableName() string {
