@@ -50,3 +50,7 @@ Client    8081
 Adminer   8082
 Postgres  8083
 ```
+### Link go 
+```
+source ~/.profile 
+```

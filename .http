@@ -46,12 +46,13 @@ content-type: application/json
 ###
 
 //Modification d'un user par un admin
-PUT http://localhost:8080/user/24419cca-1acc-47d3-a6d3-b7a43767a90f HTTP/1.1
+PUT http://localhost:8080/user/bd985ba2-9231-48b2-8ae8-9350e675ab17 HTTP/1.1
 Content-Type: application/json
 Authorization: 0ab10757-d491-42a9-acad-328005185b9d
 AccessLevel: 1
 
-{
+{   
+    "uuid": "foo",
     "firstname":"Kevin"
 }
 
