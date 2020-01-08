@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/fatih/color v1.7.0 // indirect
+	github.com/gin-contrib/cors v1.3.0
 	github.com/gin-gonic/gin v1.4.0
 	github.com/githubnemo/CompileDaemon v1.0.0 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect
@@ -14,6 +15,7 @@ require (
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lib/pq v1.1.1
 	github.com/mattn/go-colorable v0.1.4 // indirect
+	github.com/rs/cors v1.7.0 // indirect
 	github.com/satori/go.uuid v1.2.0
 	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
 	gopkg.in/go-playground/validator.v9 v9.30.0
