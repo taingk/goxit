@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      input: 'input'
+      input: 'Input'
     };
   }
 };
