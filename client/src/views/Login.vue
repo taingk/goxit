@@ -17,6 +17,7 @@
 <script>
 import Formik from '@/components/formik/Formik.vue';
 import Field from '@/components/formik/Field.vue';
+import axios from '@/utils/axios';
 
 export default {
   name: 'Login',
@@ -28,6 +29,14 @@ export default {
     handleSubmit({ event, values }) {
       event.preventDefault();
       console.log(values);
+      axios
+        .post('/login', {
+          email: values.email,
+          password: values.password
+        })
+        .then(response => {
+          console.log(response);
+        });
     }
   }
 };
