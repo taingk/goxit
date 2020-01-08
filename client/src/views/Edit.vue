@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "editvote",
+  name: 'Editvote',
   components: {},
   methods: {}
 };

@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import './registerServiceWorker';
-import axios from "axios";
+import axios from 'axios';
 
 Vue.use(axios);
 Vue.config.productionTip = false;

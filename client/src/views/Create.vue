@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "create",
+  name: 'Create',
   components: {},
   methods: {}
 };

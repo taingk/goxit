@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "showvote",
+  name: 'Showvote',
   components: {},
   methods: {}
 };

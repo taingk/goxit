@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "listvote",
+  name: 'Listvote',
   components: {},
   methods: {}
 };
