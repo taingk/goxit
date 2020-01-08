@@ -1,8 +1,6 @@
 package Helpers
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 )
 
