@@ -1,21 +1,26 @@
 <template>
-  <div>
-    <label v-if="label">{{ label }}</label>
-    <component v-bind:is="component" v-bind="$props"></component>
-  </div>
+  <component :is="input" v-bind="$props" />
 </template>
 
 <script>
+import Input from '@/components/formik/Input.vue';
+
 export default {
-  name: "Field",
+  name: 'Field',
+  components: {
+    Input
+  },
   props: {
     name: String,
-    label: String,
     type: String,
     id: String,
     required: Boolean,
-    checked: Boolean,
-    component: String
+    checked: Boolean
+  },
+  data() {
+    return {
+      input: 'input'
+    };
   }
 };
 </script>

@@ -1,38 +1,39 @@
 <template>
-  <div>
-    <slot></slot>
+  <div @submit="handleSubmit">
+    <slot />
   </div>
 </template>
 
 <script>
 export default {
-  name: "formik",
+  name: 'Formik',
   props: {
     initialValues: Object
   },
-  data: function() {
+  data() {
     return {
+      defaultValues: this.initialValues,
       values: {}
     };
   },
   methods: {
-    setFormValue: function(key, value) {
-      this.form.values[key] = value;
+    setValue(key, value) {
+      this.values[key] = value;
     },
-    getFormInitialValue: function(key) {
-      return this.initialValues[key];
+    getValue(key) {
+      return this.defaultValues[key];
     },
-    handleSubmit: function(event) {
-      this.$emit("submit", {
-        event,
-        values: this.values
+    handleSubmit(event) {
+      this.$emit('onSubmit', {
+        values: this.values,
+        event
       });
     }
   },
-  provide: function() {
+  provide() {
     return {
-      setFormValue: this.setFormValue,
-      getFormInitialValue: this.getFormInitialValue
+      setValue: this.setValue,
+      getValue: this.getValue
     };
   }
 };
