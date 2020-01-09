@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <div v-if="authenticated">
+      <div v-if="isAuthenticated()">
         <router-link to="/votes">Vote List</router-link> |
-        <router-link to="/logout">Logout</router-link>
+        <router-link to="/logout">Logout</router-link> |
+        <router-link to="/">Profile</router-link>
       </div>
       <div v-else>
         <router-link to="/login">Login</router-link> |
@@ -17,10 +18,10 @@
 import store from '@/store';
 
 export default {
-  data: () => {
-    return {
-      authenticated: store.state.token
-    };
+  methods: {
+    isAuthenticated() {
+      return store.state.token;
+    }
   }
 };
 </script>

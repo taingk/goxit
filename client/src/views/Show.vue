@@ -3,7 +3,6 @@
     <h1 class="title">Vote</h1>
     <h3>{{ response.data.title }}</h3>
     <p>{{ response.data.description }}</p>
-    <router-view />
   </div>
 </template>
 
