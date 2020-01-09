@@ -1,14 +1,33 @@
 <template>
   <div>
     <h1 class="title">Vote</h1>
+    <h3>{{ response.data.title }}</h3>
+    <p>{{ response.data.description }}</p>
   </div>
 </template>
 
 <script>
+import axios from '@/utils/axios';
+
 export default {
-  name: 'Showvote',
+  name: 'Show',
   components: {},
-  methods: {}
+  methods: {
+    handleSubmit({ event }) {
+      event.preventDefault();
+      axios
+        .get('/vote' + this.$route.params.uui)
+        .then(response => {
+          if (response.status === 200) {
+            console.log('Logged !');
+            console.log(response);
+          }
+        })
+        .catch(response => {
+          console.log(response);
+        });
+    }
+  }
 };
 </script>
 

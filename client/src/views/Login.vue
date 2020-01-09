@@ -1,23 +1,27 @@
 <template>
-  <Formik
-    :initial-values="{
-      email: '',
-      password: ''
-    }"
-    @onSubmit="handleSubmit"
-  >
-    <form>
-      <Field type="email" name="email" placeholder="Email" />
-      <Field type="password" name="password" placeholder="Password" />
-      <button type="submit">Se connecter</button>
-    </form>
-  </Formik>
+  <div>
+    <h1>Login</h1>
+    <Formik
+      :initial-values="{
+        email: '',
+        password: ''
+      }"
+      @onSubmit="handleSubmit"
+    >
+      <form>
+        <Field type="email" name="email" placeholder="Email" />
+        <Field type="password" name="password" placeholder="Password" />
+        <button type="submit">Se connecter</button>
+      </form>
+    </Formik>
+  </div>
 </template>
 
 <script>
 import Formik from '@/components/formik/Formik.vue';
 import Field from '@/components/formik/Field.vue';
 import axios from '@/utils/axios';
+import store from '@/store';
 
 export default {
   name: 'Login',
@@ -28,13 +32,19 @@ export default {
   methods: {
     handleSubmit({ event, values }) {
       event.preventDefault();
-      console.log(values);
       axios
         .post('/login', {
           email: values.email,
           password: values.password
         })
         .then(response => {
+          if (response.status === 200) {
+            store.commit('authenticate', response.data);
+            this.$router.push('/vote');
+            console.log('Logged !');
+          }
+        })
+        .catch(response => {
           console.log(response);
         });
     }

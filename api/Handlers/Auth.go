@@ -16,7 +16,7 @@ func Login(c *gin.Context) {
 	c.BindJSON(&user)
 	err := Models.GetUserByEmailPassword(&user)
 	if err != nil {
-		Helpers.RespondJSON(c, 404, user)
+		Helpers.RespondJSON(c, 401, user)
 	} else {
 		var jwt Jwt
 

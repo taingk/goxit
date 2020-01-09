@@ -17,17 +17,17 @@ const routes = [
     component: Home
   },
   {
-    path: '/vote/:id',
-    name: 'show-vote',
-    component: Show,
+    path: '/vote',
+    name: 'create',
+    component: Create,
     children: [
       {
-        path: 'edit',
+        path: '/edit',
         component: Edit
       },
       {
-        path: 'create',
-        component: Create
+        path: '/:id',
+        component: Show
       }
     ]
   },

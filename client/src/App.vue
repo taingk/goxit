@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <div v-if="logged">
+      <div v-if="authenticated">
         <router-link to="/votes">Vote List</router-link> |
         <router-link to="/logout">Logout</router-link>
       </div>
@@ -14,7 +14,15 @@
   </div>
 </template>
 <script>
-export default {};
+import store from '@/store';
+
+export default {
+  data: () => {
+    return {
+      authenticated: store.state.token
+    };
+  }
+};
 </script>
 
 <style lang="scss">
