@@ -2,7 +2,7 @@
   <div>
     <h1 class="title">Vote List</h1>
     <ul id="v-for-object" class="demo">
-      <li :v-for="vote in votes">
+      <li v-for="vote in votes" :key="vote.uuid">
         <h3>{{ vote.title }}</h3>
         <p>{{ vote.description }}</p>
       </li>
@@ -18,8 +18,7 @@ export default {
   components: {},
   data: function() {
     return {
-      vote: {},
-      votes: {}
+      votes: []
     };
   },
   created() {
