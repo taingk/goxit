@@ -22,11 +22,11 @@ const routes = [
     component: Create,
     children: [
       {
-        path: '/edit',
+        path: 'edit',
         component: Edit
       },
       {
-        path: '/:id',
+        path: ':uuid',
         component: Show
       }
     ]

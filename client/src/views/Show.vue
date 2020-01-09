@@ -3,6 +3,7 @@
     <h1 class="title">Vote</h1>
     <h3>{{ response.data.title }}</h3>
     <p>{{ response.data.description }}</p>
+    <router-view />
   </div>
 </template>
 
@@ -16,10 +17,9 @@ export default {
     handleSubmit({ event }) {
       event.preventDefault();
       axios
-        .get('/vote' + this.$route.params.uui)
+        .get('vote/' + this.$route.params.uuid)
         .then(response => {
           if (response.status === 200) {
-            console.log('Logged !');
             console.log(response);
           }
         })
