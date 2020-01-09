@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1 class="title">Vote</h1>
-    <h3>{{ response.data.title }}</h3>
-    <p>{{ response.data.description }}</p>
+    <h3>{{ vote.title }}</h3>
+    <p>{{ vote.description }}</p>
+    <button @click="handleSubmit">Vote</button>
   </div>
 </template>
 
@@ -12,14 +13,32 @@ import axios from '@/utils/axios';
 export default {
   name: 'Show',
   components: {},
+  data: function() {
+    return {
+      vote: {}
+    };
+  },
+  created() {
+    axios
+      .get('vote/' + this.$route.params.uuid)
+      .then(response => {
+        if (response.status === 200) {
+          this.vote = response.data;
+          console.log(response);
+        }
+      })
+      .catch(response => {
+        console.log(response);
+      });
+  },
   methods: {
-    handleSubmit({ event }) {
-      event.preventDefault();
+    handleSubmit() {
       axios
-        .get('vote/' + this.$route.params.uuid)
+        .put('vote/' + this.$route.params.uuid)
         .then(response => {
           if (response.status === 200) {
-            console.log(response);
+            console.log('voted');
+            // this.$router.push('/vote');
           }
         })
         .catch(response => {

@@ -19,15 +19,16 @@ const routes = [
   {
     path: '/vote',
     name: 'create',
-    component: Create,
+    component: Create
+  },
+  {
+    path: '/vote/:uuid',
+    name: 'show-vote',
+    component: Show,
     children: [
       {
         path: 'edit',
         component: Edit
-      },
-      {
-        path: ':uuid',
-        component: Show
       }
     ]
   },
