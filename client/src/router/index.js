@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
+import Logout from '../components/Logout.vue';
 import Show from '../views/Show.vue';
 import Edit from '../views/Edit.vue';
 import List from '../views/List.vue';
@@ -46,6 +47,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: Logout
   }
 ];
 
