@@ -58,7 +58,7 @@ func PutOneVote(c *gin.Context) {
 		c.BindJSON(newvote)
 		err = Models.PutOneVote(&vote, uuid)
 		if err != nil {
-			Helpers.RespondJSON(c, 400, vote)
+			Helpers.RespondJSON(c, 401, vote)
 		} else {
 			Helpers.RespondJSON(c, 200, vote)
 		}

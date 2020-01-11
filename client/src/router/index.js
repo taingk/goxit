@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Register from '../views/Register.vue';
-import Login from '../views/Login.vue';
+import Register from '../views/User/Register.vue';
+import Login from '../views/User/Login.vue';
 import Logout from '../components/Logout.vue';
-import Show from '../views/Show.vue';
-import Edit from '../views/Edit.vue';
-import List from '../views/List.vue';
-import Create from '../views/Create.vue';
+import Show from '../views/Vote/Show.vue';
+import Edit from '../views/Vote/Edit.vue';
+import List from '../views/Vote/List.vue';
+import Create from '../views/Vote/Create.vue';
 
 Vue.use(VueRouter);
 
