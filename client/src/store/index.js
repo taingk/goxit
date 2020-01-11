@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from '@/utils/axios';
+// import axios from '@/utils/axios';
 import VuexPersist from 'vuex-persist';
 
 Vue.use(Vuex);
@@ -20,8 +20,6 @@ export default new Vuex.Store({
     authenticate(state, payload) {
       state.token = payload.JWT;
       state.accessLevel = payload.AccessLevel;
-      axios.defaults.headers.common['Authorization'] = state.token;
-      axios.defaults.headers.common['AccessLevel'] = state.accessLevel;
     }
   }
 });

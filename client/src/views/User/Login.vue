@@ -40,7 +40,7 @@ export default {
         .then(response => {
           if (response.status === 200) {
             store.commit('authenticate', response.data);
-            this.$router.push('/vote');
+            this.$router.push('/votes');
             console.log('Logged !');
           }
         })

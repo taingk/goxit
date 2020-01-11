@@ -104,3 +104,19 @@ func AuthorizeSimpleUser(c *gin.Context) bool {
 		return false
 	}
 }
+
+func SimpleAuth(c *gin.Context) bool {
+	accessLevel := c.Request.Header.Get("AccessLevel")
+	uuid := c.Request.Header.Get("Authorization")
+	var user User
+	user.UUID = uuid
+	parsedAccessLevel, _ := strconv.ParseInt(accessLevel, 10, 64)
+	user.AccessLevel = int(parsedAccessLevel)
+	err := GetLoggedUser(&user)
+
+	if parsedAccessLevel >= 0 && err == nil {
+		return true
+	} else {
+		return false
+	}
+}

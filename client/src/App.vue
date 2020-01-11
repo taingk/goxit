@@ -2,9 +2,12 @@
   <div id="app">
     <div id="nav">
       <div v-if="isAuthenticated()">
+        <span v-if="isAdmin()">
+          <router-link to="/vote">Create vote</router-link> |
+        </span>
         <router-link to="/votes">Vote List</router-link> |
-        <router-link to="/logout">Logout</router-link> |
-        <router-link to="/">Profile</router-link>
+        <router-link to="/user">Profile</router-link> |
+        <router-link to="/logout">Logout</router-link>
       </div>
       <div v-else>
         <router-link to="/login">Login</router-link> |
@@ -21,6 +24,9 @@ export default {
   methods: {
     isAuthenticated() {
       return store.state.token;
+    },
+    isAdmin() {
+      return store.state.accessLevel;
     }
   }
 };

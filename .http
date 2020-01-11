@@ -63,6 +63,18 @@ AccessLevel: 1
 }
 
 ###
+
+//Modification d'un user
+PUT http://localhost:8080/user/845245fc-0631-44cf-bfbf-f68bda5e17a4 HTTP/1.1
+Content-Type: application/json
+Authorization: 845245fc-0631-44cf-bfbf-f68bda5e17a4
+AccessLevel: 0
+
+{
+    "firstname":"Kevin"
+}
+
+###
 //Création d'un sujet de vote
 POST http://localhost:8080/vote HTTP/1.1
 Content-Type: application/json
@@ -88,7 +100,7 @@ AccessLevel: 1
 
 ###
 //Vote de kevin
-PUT http://localhost:8080/vote/604a49f8-f7d8-4853-a35c-40b3dbf46de4 HTTP/1.1
+PUT http://localhost:8080/vote/316a1e2f-8bc7-4ec1-bf1c-46819a1bc60c HTTP/1.1
 Content-Type: application/json
 Authorization: bd985ba2-9231-48b2-8ae8-9350e675ab17
 AccessLevel: 0

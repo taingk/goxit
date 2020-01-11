@@ -41,7 +41,7 @@ func GetOneUser(c *gin.Context) {
 }
 
 func PutOneUser(c *gin.Context) {
-	if Models.Authorize(c) == true {
+	if Models.SimpleAuth(c) == true {
 		var user Models.User
 		uuid := c.Params.ByName("uuid")
 		err := Models.GetOneUser(&user, uuid)
@@ -61,7 +61,7 @@ func PutOneUser(c *gin.Context) {
 }
 
 func DeleteUser(c *gin.Context) {
-	if Models.Authorize(c) == true {
+	if Models.SimpleAuth(c) == true {
 		var user Models.User
 		uuid := c.Params.ByName("uuid")
 		err := Models.GetOneUser(&user, uuid)
