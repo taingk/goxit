@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <h1 class="title">Create Vote</h1>
     <Formik
       :initial-values="{
@@ -8,16 +8,24 @@
       }"
       @onSubmit="handleSubmit"
     >
-      <form>
-        <Field type="text" name="title" placeholder="Title" tag="input" />
-        <Field
-          class="textarea"
-          type="textarea"
-          name="description"
-          placeholder="Description"
-          tag="textarea"
-        />
-        <button type="submit">Post</button>
+      <form class="centered">
+        <div class="half">
+          <Field
+            type="text"
+            name="title"
+            placeholder="Title"
+            tag="input"
+            class="stack"
+          />
+          <Field
+            class="textarea stack"
+            type="textarea"
+            name="description"
+            placeholder="Description"
+            tag="textarea"
+          />
+          <button class="button stack" type="submit">Post</button>
+        </div>
       </form>
     </Formik>
   </div>
@@ -56,4 +64,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.centered {
+  display: flex;
+  justify-content: center;
+}
+</style>

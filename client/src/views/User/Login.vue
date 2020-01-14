@@ -8,22 +8,24 @@
       }"
       @onSubmit="handleSubmit"
     >
-      <form>
-        <Field
-          class="input"
-          type="email"
-          name="email"
-          placeholder="Email"
-          tag="input"
-        />
-        <Field
-          class="input"
-          type="password"
-          name="password"
-          placeholder="Password"
-          tag="input"
-        />
-        <button class="button" type="submit">Se connecter</button>
+      <form class="centered">
+        <div class="half">
+          <Field
+            class="input stack"
+            type="email"
+            name="email"
+            placeholder="Email"
+            tag="input"
+          />
+          <Field
+            class="input stack"
+            type="password"
+            name="password"
+            placeholder="Password"
+            tag="input"
+          />
+          <button class="button stack" type="submit">Se connecter</button>
+        </div>
       </form>
     </Formik>
   </div>
@@ -63,3 +65,9 @@ export default {
   }
 };
 </script>
+<style lang="css">
+.centered {
+  display: flex;
+  justify-content: center;
+}
+</style>

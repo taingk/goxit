@@ -10,12 +10,37 @@
       }"
       @onSubmit="handleSubmit"
     >
-      <form>
-        <Field type="text" name="firstname" placeholder="Firstname" />
-        <Field type="text" name="lastname" placeholder="Lastname" />
-        <Field type="email" name="email" placeholder="Email" />
-        <Field type="password" name="password" placeholder="Password" />
-        <button type="submit">Register</button>
+      <form class="centered">
+        <div class="half">
+          <Field
+            type="text"
+            name="firstname"
+            placeholder="Firstname"
+            class="stack"
+          />
+          <Field
+            type="text"
+            name="lastname"
+            placeholder="Lastname"
+            tag="input"
+            class="stack"
+          />
+          <Field
+            type="email"
+            name="email"
+            placeholder="Email"
+            tag="input"
+            class="stack"
+          />
+          <Field
+            type="password"
+            name="password"
+            placeholder="Password"
+            tag="input"
+            class="stack"
+          />
+          <button type="submit" class="button stack">Register</button>
+        </div>
       </form>
     </Formik>
   </div>
@@ -55,3 +80,9 @@ export default {
   }
 };
 </script>
+<style lang="css">
+.centered {
+  display: flex;
+  justify-content: center;
+}
+</style>

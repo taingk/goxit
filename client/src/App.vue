@@ -4,21 +4,31 @@
       <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
-      <nav id="nav" style="position: fixed;">
-        <div v-if="isAuthenticated()">
-          <span v-if="isAdmin()">
-            <router-link to="/vote">Create vote</router-link> |
-          </span>
-          <router-link to="/votes">Vote List</router-link> |
-          <router-link to="/user">Profile</router-link> |
-          <router-link to="/logout">Logout</router-link>
-        </div>
-        <div v-else>
-          <router-link to="/login">Login</router-link> |
-          <router-link to="/register">Register</router-link>
+      <nav style="position: fixed;">
+        <router-link to="/votes" class="brand">
+          <img class="logo" src="./assets/logo2.png" />
+          <span>GOXIT</span></router-link
+        >
+        <div class="menu">
+          <div v-if="isAuthenticated()">
+            <span v-if="isAdmin()">
+              <router-link class="button" to="/vote">Create vote</router-link>
+            </span>
+            <router-link class=" pseudo button" to="/votes"
+              >Vote List</router-link
+            >
+            <router-link class=" pseudo button" to="/user">Profile</router-link>
+            <router-link class="pseudo button" to="/logout">Logout</router-link>
+          </div>
+          <div v-else>
+            <router-link class=" pseudo button" to="/login">Login</router-link>
+            <router-link class="  button" to="/register">Register</router-link>
+          </div>
         </div>
       </nav>
-      <router-view style="padding-top: 45px" />
+      <div class="flex demo wrapper">
+        <router-view style="padding-top: 45px" />
+      </div>
     </body>
     <link rel="stylesheet" href="https://unpkg.com/picnic" />
   </div>
@@ -57,6 +67,12 @@ export default {
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>
