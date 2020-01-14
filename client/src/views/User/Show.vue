@@ -17,11 +17,32 @@
         @onSubmit="handleSubmit"
       >
         <form>
-          <p><Field type="text" name="firstname" placeholder="Firstname" /></p>
-          <p><Field type="text" name="lastname" placeholder="Lastname" /></p>
-          <p><Field type="email" name="email" placeholder="Email" /></p>
           <p>
-            <Field type="password" name="password" placeholder="Password" />
+            <Field
+              tag="input"
+              type="text"
+              name="firstname"
+              placeholder="Firstname"
+            />
+          </p>
+          <p>
+            <Field
+              tag="input"
+              type="text"
+              name="lastname"
+              placeholder="Lastname"
+            />
+          </p>
+          <p>
+            <Field tag="input" type="email" name="email" placeholder="Email" />
+          </p>
+          <p>
+            <Field
+              tag="input"
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
           </p>
           <button type="submit">Update</button>
         </form>
