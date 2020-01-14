@@ -18,7 +18,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    redirect: '/login'
   },
   {
     path: '/vote',
