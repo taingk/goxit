@@ -1,20 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <div v-if="isAuthenticated()">
-        <span v-if="isAdmin()">
-          <router-link to="/vote">Create vote</router-link> |
-        </span>
-        <router-link to="/votes">Vote List</router-link> |
-        <router-link to="/user">Profile</router-link> |
-        <router-link to="/logout">Logout</router-link>
-      </div>
-      <div v-else>
-        <router-link to="/login">Login</router-link> |
-        <router-link to="/register">Register</router-link>
-      </div>
-    </div>
-    <router-view />
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+      <nav id="nav" style="position: fixed;">
+        <div v-if="isAuthenticated()">
+          <span v-if="isAdmin()">
+            <router-link to="/vote">Create vote</router-link> |
+          </span>
+          <router-link to="/votes">Vote List</router-link> |
+          <router-link to="/user">Profile</router-link> |
+          <router-link to="/logout">Logout</router-link>
+        </div>
+        <div v-else>
+          <router-link to="/login">Login</router-link> |
+          <router-link to="/register">Register</router-link>
+        </div>
+      </nav>
+      <router-view style="padding-top: 45px" />
+    </body>
+    <link rel="stylesheet" href="https://unpkg.com/picnic" />
   </div>
 </template>
 <script>

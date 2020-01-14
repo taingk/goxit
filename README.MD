@@ -54,3 +54,8 @@ Postgres  8083
 ```
 source ~/.profile 
 ```
+
+### Palette
+```
+https://colorhunt.co/palette/69360
+```

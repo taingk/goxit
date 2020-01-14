@@ -9,8 +9,14 @@
       @onSubmit="handleSubmit"
     >
       <form>
-        <Field type="text" name="title" placeholder="Title" />
-        <Field type="textarea" name="description" placeholder="Description" />
+        <Field type="text" name="title" placeholder="Title" tag="input" />
+        <Field
+          class="textarea"
+          type="textarea"
+          name="description"
+          placeholder="Description"
+          tag="textarea"
+        />
         <button type="submit">Post</button>
       </form>
     </Formik>

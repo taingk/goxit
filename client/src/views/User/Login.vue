@@ -9,9 +9,21 @@
       @onSubmit="handleSubmit"
     >
       <form>
-        <Field type="email" name="email" placeholder="Email" />
-        <Field type="password" name="password" placeholder="Password" />
-        <button type="submit">Se connecter</button>
+        <Field
+          class="input"
+          type="email"
+          name="email"
+          placeholder="Email"
+          tag="input"
+        />
+        <Field
+          class="input"
+          type="password"
+          name="password"
+          placeholder="Password"
+          tag="input"
+        />
+        <button class="button" type="submit">Se connecter</button>
       </form>
     </Formik>
   </div>
