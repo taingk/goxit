@@ -7,6 +7,7 @@
           <tr>
             <th>Title</th>
             <th>Description</th>
+            <th>Votes</th>
           </tr>
         </thead>
         <tbody id="v-for-object">
@@ -18,6 +19,8 @@
               </router-link>
             </td>
             <td>{{ vote.description }}</td>
+            <td v-if="vote.uuid_votes">{{ vote.uuid_votes.length }}</td>
+            <td v-else>0</td>
           </tr>
         </tbody>
       </table>
@@ -42,6 +45,7 @@ export default {
       .then(response => {
         if (response.status === 200) {
           this.votes = response.data;
+          console.log(response);
         }
       })
       .catch(response => {
