@@ -1,6 +1,8 @@
 package Handlers
 
 import (
+	"sort"
+
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 	"github.com/taingk/goxit/api/Helpers"
@@ -71,17 +73,27 @@ func PutOneVote(c *gin.Context) {
 			Helpers.RespondJSON(c, 404, vote)
 		}
 		UUIDVotes := vote.UUIDVotes
-		UUIDVotes = append(UUIDVotes, userUUID)
-		vote.UUIDVotes = UUIDVotes
-		err = Models.PutOneVote(&vote, voteUUID)
-		if err != nil {
-			Helpers.RespondJSON(c, 400, vote)
+		sort.Strings(UUIDVotes)
+		if contains(UUIDVotes, userUUID) == false {
+			UUIDVotes = append(UUIDVotes, userUUID)
+			vote.UUIDVotes = UUIDVotes
+			err = Models.PutOneVote(&vote, voteUUID)
+			if err != nil {
+				Helpers.RespondJSON(c, 400, vote)
+			} else {
+				Helpers.RespondJSON(c, 200, vote)
+			}
 		} else {
-			Helpers.RespondJSON(c, 200, vote)
+			Helpers.RespondJSON(c, 401, "Already voted")
 		}
 	} else {
 		Helpers.RespondJSON(c, 401, "Access not granted")
 	}
+}
+
+func contains(s []string, searchterm string) bool {
+	i := sort.SearchStrings(s, searchterm)
+	return i < len(s) && s[i] == searchterm
 }
 
 func DeleteVote(c *gin.Context) {
