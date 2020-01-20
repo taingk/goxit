@@ -17,6 +17,7 @@
             name="firstname"
             placeholder="Firstname"
             class="stack"
+            tag="input"
           />
           <Field
             type="text"

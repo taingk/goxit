@@ -1,10 +1,11 @@
 <template>
   <div>
     <h1>Profile</h1>
-    <div v-if="!edit">
-      <p>{{ user.firstname }}</p>
-      <p>{{ user.lastname }}</p>
-      <p>{{ user.email }}</p>
+    <div v-if="!edit" class="centered">
+      <article class="card half">
+        <p>{{ user.firstname }} {{ user.lastname }}</p>
+        <p>{{ user.email }}</p>
+      </article>
     </div>
     <div v-else>
       <Formik
@@ -16,36 +17,43 @@
         }"
         @onSubmit="handleSubmit"
       >
-        <form>
-          <p>
-            <Field
-              tag="input"
-              type="text"
-              name="firstname"
-              placeholder="Firstname"
-            />
-          </p>
-          <p>
-            <Field
-              tag="input"
-              type="text"
-              name="lastname"
-              placeholder="Lastname"
-            />
-          </p>
-          <p>
-            <Field tag="input" type="email" name="email" placeholder="Email" />
-          </p>
-          <p>
-            <Field
-              tag="input"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-          </p>
-          <button type="submit">Update</button>
-        </form>
+        <div class="centered">
+          <form>
+            <p>
+              <Field
+                tag="input"
+                type="text"
+                name="firstname"
+                placeholder="Firstname"
+              />
+            </p>
+            <p>
+              <Field
+                tag="input"
+                type="text"
+                name="lastname"
+                placeholder="Lastname"
+              />
+            </p>
+            <p>
+              <Field
+                tag="input"
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+            </p>
+            <p>
+              <Field
+                tag="input"
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+            </p>
+            <button type="submit">Update</button>
+          </form>
+        </div>
       </Formik>
     </div>
     <button @click="isEditable()">{{ edit ? 'Back' : 'Edit' }}</button>
@@ -108,3 +116,9 @@ export default {
   }
 };
 </script>
+<style lang="css">
+.centered {
+  display: flex;
+  justify-content: center;
+}
+</style>

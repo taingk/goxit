@@ -3,6 +3,8 @@
     <h1 class="title">Vote</h1>
     <h3>{{ vote.title }}</h3>
     <p>{{ vote.description }}</p>
+    <p v-if="vote.uuid_votes">{{ vote.uuid_votes.length }} votes</p>
+    <p v-else>0</p>
     <button @click="handleSubmit">Vote</button>
   </div>
 </template>
@@ -38,7 +40,6 @@ export default {
         .then(response => {
           if (response.status === 200) {
             console.log('voted');
-            // this.$router.push('/vote');
           }
         })
         .catch(response => {

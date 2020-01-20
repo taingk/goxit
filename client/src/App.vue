@@ -31,6 +31,10 @@
       </div>
     </body>
     <link rel="stylesheet" href="https://unpkg.com/picnic" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
   </div>
 </template>
 <script>
@@ -48,7 +52,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="css">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -57,22 +61,13 @@ export default {
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+*{
+    font-family: 'Roboto', sans-serif;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
