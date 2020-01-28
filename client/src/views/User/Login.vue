@@ -55,7 +55,6 @@ export default {
           if (response.status === 200) {
             store.commit('authenticate', response.data);
             this.$router.push('/votes');
-            console.log('Logged !');
           }
         })
         .catch(response => {
