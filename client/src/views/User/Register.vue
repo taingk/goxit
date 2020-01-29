@@ -70,12 +70,27 @@ export default {
         })
         .then(response => {
           if (response.status === 200) {
+            this.$toasted.success('You are registered');
             this.$router.push('/');
-            console.log('Registered !');
           }
         })
-        .catch(response => {
-          console.log(response);
+        .catch(({ response }) => {
+          if (response.data.Code === '23505') {
+            this.$toasted.error('Email already exists');
+          }
+          const { firstname, lastname, password } = values;
+
+          if (firstname.length < 2) {
+            this.$toasted.error(
+              'Firstname must be 2 characters length minimum'
+            );
+          }
+          if (lastname.length < 2) {
+            this.$toasted.error('Lastname must be 2 characters length minimum');
+          }
+          if (password.length < 6) {
+            this.$toasted.error('Password must be 6 characters length minimum');
+          }
         });
     }
   }

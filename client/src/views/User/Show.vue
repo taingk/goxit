@@ -104,13 +104,28 @@ export default {
         .put(`/user/${store.state.token}`, body)
         .then(response => {
           if (response.status === 200) {
-            console.log('Updated', response.data);
+            this.$toasted.success('You updated your profile');
             this.user = response.data;
             this.edit = !this.edit;
           }
         })
-        .catch(response => {
-          console.log(response);
+        .catch(({ response }) => {
+          if (response.data.Code === '23505') {
+            this.$toasted.error('Email already exists');
+          }
+          const { firstname, lastname, password } = values;
+
+          if (firstname.length < 2) {
+            this.$toasted.error(
+              'Firstname must be 2 characters length minimum'
+            );
+          }
+          if (lastname.length < 2) {
+            this.$toasted.error('Lastname must be 2 characters length minimum');
+          }
+          if (password.length !== 0 && password.length < 6) {
+            this.$toasted.error('Password must be 6 characters length minimum');
+          }
         });
     }
   }

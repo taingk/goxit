@@ -23,7 +23,7 @@ func AddNewUser(c *gin.Context) {
 	c.BindJSON(&user)
 	err := Models.AddNewUser(&user)
 	if err != nil {
-		Helpers.RespondJSON(c, 401, user)
+		Helpers.RespondJSON(c, 401, err)
 	} else {
 		Helpers.RespondJSON(c, 200, user)
 	}

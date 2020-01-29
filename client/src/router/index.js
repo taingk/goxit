@@ -14,6 +14,14 @@ import store from '@/store';
 
 Vue.use(VueRouter);
 
+const preventGuest = next => {
+  if (store.state.token) {
+    next();
+  } else {
+    next({ name: 'home' });
+  }
+};
+
 const routes = [
   {
     path: '/',
@@ -24,7 +32,10 @@ const routes = [
   {
     path: '/vote',
     name: 'create',
-    component: VoteCreate
+    component: VoteCreate,
+    beforeEnter(to, from, next) {
+      preventGuest(next);
+    }
   },
   {
     path: '/vote/:uuid',
@@ -35,17 +46,26 @@ const routes = [
         path: 'edit',
         component: VoteEdit
       }
-    ]
+    ],
+    beforeEnter(to, from, next) {
+      preventGuest(next);
+    }
   },
   {
     path: '/votes',
     name: 'list-votes',
-    component: VoteList
+    component: VoteList,
+    beforeEnter(to, from, next) {
+      preventGuest(next);
+    }
   },
   {
     path: '/user/:uuid?',
     name: 'show-user',
-    component: UserShow
+    component: UserShow,
+    beforeEnter(to, from, next) {
+      preventGuest(next);
+    }
   },
   {
     path: '/register',
@@ -60,7 +80,10 @@ const routes = [
   {
     path: '/logout',
     name: 'logout',
-    component: Logout
+    component: Logout,
+    beforeEnter(to, from, next) {
+      preventGuest(next);
+    }
   }
 ];
 

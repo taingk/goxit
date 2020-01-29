@@ -42,7 +42,7 @@ export default {
             console.log(response.data.uuid);
           }
         })
-        .catch(response => {
+        .catch(({ response }) => {
           console.log(response);
         });
     }

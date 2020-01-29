@@ -18,7 +18,7 @@ content-type: application/json
 {
     "FirstName":"Kevin",
     "LastName":"Taing",
-    "Email":"ktaing@gmail.com",
+    "Email":"test@gmail.com",
     "Password":"meloforever"
 }
 ###
@@ -82,8 +82,8 @@ Authorization: 6f6a4c6c-aaf8-4ab8-a1d2-a0985a17dc60
 AccessLevel: 1
 
 {
-    "title": "meetup",
-    "description": "UX/UI"
+    "title": "3e guerre mondiale ?",
+    "description": "C'est la hess"
 }
 ###
 //Modification d'un vote de la part d'un admin
@@ -102,7 +102,7 @@ AccessLevel: 1
 //Vote de kevin
 PUT http://localhost:8080/vote/316a1e2f-8bc7-4ec1-bf1c-46819a1bc60c HTTP/1.1
 Content-Type: application/json
-Authorization: bd985ba2-9231-48b2-8ae8-9350e675ab17
+Authorization: 81477ba4-473a-46fd-b663-8ee1d63d0e2d
 AccessLevel: 0
 
 

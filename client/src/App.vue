@@ -7,8 +7,8 @@
       <nav style="position: fixed;">
         <router-link to="/votes" class="brand">
           <img class="logo" src="./assets/logo2.png" />
-          <span>GOXIT</span></router-link
-        >
+          <span>GOXIT</span>
+        </router-link>
         <div class="menu">
           <div v-if="isAuthenticated()">
             <span v-if="isAdmin()">

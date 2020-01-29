@@ -11,6 +11,7 @@ export default {
     response.data.JWT = null;
     response.data.AccessLevel = 0;
     store.commit('authenticate', response.data);
+    this.$toasted.success('You are logged out');
     this.$router.push('/login');
   }
 };

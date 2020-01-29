@@ -52,12 +52,26 @@ export default {
         })
         .then(response => {
           if (response.status === 200) {
+            this.$toasted.success(
+              `You have created the vote : ${values.title}`
+            );
             this.$router.push('vote/' + response.data.uuid);
-            console.log(response.data.uuid);
           }
         })
-        .catch(response => {
-          console.log(response);
+        .catch(({ response }) => {
+          if (response.data.Code === '23505') {
+            this.$toasted.error('Title already exists');
+          }
+          const { title, description } = values;
+
+          if (title.length < 2) {
+            this.$toasted.error('Title must be 2 characters length minimum');
+          }
+          if (description.length < 2) {
+            this.$toasted.error(
+              'Description must be 2 characters length minimum'
+            );
+          }
         });
     }
   }

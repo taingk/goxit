@@ -7,12 +7,12 @@ export default {
   name: 'Field',
   inject: ['setValue', 'getValue'],
   props: {
+    id: String,
     name: String,
     type: String,
-    id: String,
-    required: Boolean,
+    tag: String,
     checked: Boolean,
-    tag: String
+    required: Boolean
   },
   data: () => ({
     value: ''

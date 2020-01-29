@@ -54,11 +54,13 @@ export default {
         .then(response => {
           if (response.status === 200) {
             store.commit('authenticate', response.data);
+            this.$toasted.success('You are logged in');
             this.$router.push('/votes');
           }
         })
-        .catch(response => {
-          console.log(response);
+        .catch(({ response }) => {
+          if (response.status === 401)
+            this.$toasted.error('The email or password seem wrong');
         });
     }
   }
