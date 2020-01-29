@@ -22,6 +22,14 @@ const preventGuest = next => {
   }
 };
 
+const preventUser = next => {
+  if (store.state.token) {
+    next({ name: 'list-votes' });
+  } else {
+    next();
+  }
+};
+
 const routes = [
   {
     path: '/',
@@ -70,12 +78,18 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: Register,
+    beforeEnter(to, from, next) {
+      preventUser(next);
+    }
   },
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    beforeEnter(to, from, next) {
+      preventUser(next);
+    }
   },
   {
     path: '/logout',
